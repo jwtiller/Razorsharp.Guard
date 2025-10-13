@@ -19,6 +19,9 @@ namespace Razorsharp.Guard
         {
             _guardOptions = guardOptions ?? new();
             _logger = logger;
+
+            if (_guardOptions.Audit != null && _logger == null)
+                throw new InvalidOperationException($"Razorsharp Guard has auditing enabled in options, but no logger is registered in the dependency injection container.");
         }
 
         public void OnResultExecuting(ResultExecutingContext context)
