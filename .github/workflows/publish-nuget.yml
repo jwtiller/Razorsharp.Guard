@@ -1,0 +1,42 @@
+name: Publish NuGet package
+
+on:
+  push:
+    tags:
+      - 'v*'   # Run when tag ex v1.0.0
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+          
+      - name: Extract version from tag
+        id: get_version
+        run: |
+          # Remove leading 'v' if present (v1.0.0 → 1.0.0)
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "Detected version: $VERSION" 
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          
+      - name: Clean old artifacts
+        run: dotnet clean && rm -rf ./artifacts
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Pack NuGet package
+        run: dotnet pack ./Razorsharp.Guard/Razorsharp.Guard.csproj --configuration Release -o ./artifacts /p:PackageVersion=${{ env.VERSION }}
+
+      - name: Publish to NuGet
+        run: dotnet nuget push "./artifacts/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

@@ -1,0 +1,6 @@
+@HelloWorld.Nuget_HostAddress = http://localhost:5056
+
+GET {{HelloWorld.Nuget_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

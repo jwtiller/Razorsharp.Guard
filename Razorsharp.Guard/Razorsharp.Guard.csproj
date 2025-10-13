@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <IncludeReferencedProjects>true</IncludeReferencedProjects>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+  </ItemGroup>
+
+	<PropertyGroup>
+		<PackageId>Razorsharp.Guard</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Jon Tiller</Authors>
+		<Company>Razorsharp AS</Company>
+		<PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/jwtiller/Razorsharp.Guard</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/jwtiller/Razorsharp.Guard</RepositoryUrl>
+		<Description>
+			Lightweight .NET library for classifying and protecting data in APIs.
+			Use simple attributes like [Public], [Confidential], and [Restricted]
+			to prevent sensitive data from being exposed.
+			Includes ASP.NET Core middleware and HostingStartup support.
+		</Description>
+		<PackageTags>security;classification;privacy;aspnetcore;razorsharp</PackageTags>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+
+</Project>
