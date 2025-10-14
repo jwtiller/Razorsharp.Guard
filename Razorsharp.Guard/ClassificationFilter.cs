@@ -13,8 +13,6 @@ namespace Razorsharp.Guard
         private readonly GuardOptions _guardOptions;
         private readonly ILogger<ClassificationFilter> _logger;
 
-        private int _depth = 0;
-
         public ClassificationFilter(GuardOptions? guardOptions = null, ILogger<ClassificationFilter> logger = null)
         {
             _guardOptions = guardOptions ?? new();
@@ -53,7 +51,7 @@ namespace Razorsharp.Guard
 
         }
 
-        private void InspectType(Type type)
+        private void InspectType(Type type, int depth = 0, Type? parentType = null)
         {
             if (type == null || _visited.Contains(type))
                 return;
@@ -77,9 +75,10 @@ namespace Razorsharp.Guard
                 Classifications.Add(new()
                 {
                     Type = type.FullName,
+                    ParentType = parentType?.FullName,
                     SensitivityLevel = classMaxSensitivity?.SensitivityLevel ?? (propertiesMaxSensitivity ?? SensitivityLevel.Restricted),
                     Reason = classMaxSensitivity?.Reason,
-                    Depth = _depth,
+                    Depth = depth,
                     AttributeLevel = AttributeLevel.Class
                 });
 
@@ -93,9 +92,10 @@ namespace Razorsharp.Guard
                 Classifications.Add(new()
                 {
                     Type = $"{type.FullName}.{prop.Name}",
+                    ParentType = parentType?.FullName,
                     SensitivityLevel = propAttribute?.SensitivityLevel ?? classSensitivity,
                     Reason = propAttribute?.Reason,
-                    Depth = _depth,
+                    Depth = depth,
                     AttributeLevel = AttributeLevel.Property
                 });
 
@@ -113,15 +113,13 @@ namespace Razorsharp.Guard
                 {
                     // if generic as List
                     var elementType = propType.GetGenericArguments()[0];
-                    InspectType(elementType);
+                    InspectType(elementType, depth+1, type);
                 }
                 else
                 {
-                    InspectType(propType);
+                    InspectType(propType, depth+1, type);
                 }
             }
-
-            _depth++;
         }
     }
 
