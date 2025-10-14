@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System.Threading.Tasks.Sources;
 using Microsoft.Extensions.Logging.Abstractions;
+using Snapshooter.NUnit;
 
 namespace Razorsharp.Guard.Tests
 {
@@ -77,6 +78,8 @@ namespace Razorsharp.Guard.Tests
             var context = CreateContext(new ProductDTO());
 
             Assert.Throws<RazorsharpGuardException>(() => filter.OnResultExecuting(context));
+
+            filter.Classifications.MatchSnapshot();
         }
     }
 }

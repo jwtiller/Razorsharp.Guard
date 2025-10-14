@@ -1,0 +1,74 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.PropertyPathTests+ProductDTO",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.PropertyPathTests+ProductDTO.Name",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.PropertyPathTests+ProductDTO.Manufacturer",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.PropertyPathTests+Manufacturer",
+    "ParentType": "Razorsharp.Guard.Tests.PropertyPathTests+ProductDTO",
+    "Reason": "Contains supplier contact information.",
+    "SensitivityLevel": "Internal",
+    "Depth": 1,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.PropertyPathTests+Manufacturer.CompanyName",
+    "ParentType": "Razorsharp.Guard.Tests.PropertyPathTests+ProductDTO",
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 1,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.PropertyPathTests+Manufacturer.FactoryAddress",
+    "ParentType": "Razorsharp.Guard.Tests.PropertyPathTests+ProductDTO",
+    "Reason": "Supplier address may reveal internal logistics location.",
+    "SensitivityLevel": "Restricted",
+    "Depth": 1,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.PropertyPathTests+FactoryAddress",
+    "ParentType": "Razorsharp.Guard.Tests.PropertyPathTests+Manufacturer",
+    "Reason": "Physical factory address classified as internal data.",
+    "SensitivityLevel": "Restricted",
+    "Depth": 2,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.PropertyPathTests+FactoryAddress.Street",
+    "ParentType": "Razorsharp.Guard.Tests.PropertyPathTests+Manufacturer",
+    "Reason": "Street information is not for public disclosure.",
+    "SensitivityLevel": "Confidential",
+    "Depth": 2,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.PropertyPathTests+FactoryAddress.City",
+    "ParentType": "Razorsharp.Guard.Tests.PropertyPathTests+Manufacturer",
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 2,
+    "AttributeLevel": "Property"
+  }
+]
