@@ -196,11 +196,29 @@ namespace Razorsharp.Guard.Tests
             [Restricted("foo")]
             public string A { get; set; }
         }
+
+        public class AllPropsArePublicClassShouldBeClassifiedPublicDTO
+        {
+            [Public]
+            public string A { get; set; }
+
+            [Public]
+            public string B { get; set; }
+        }
+
+        public class OnePropIsPublicClassShouldBeClassifiedRestrictedDTO
+        {
+            [Public]
+            public string A { get; set; }
+
+            public string B { get; set; }
+        }
             
 
         [TestCase(typeof(AllPublicNestedDTO))]
         [TestCase(typeof(AllPublicDTO))]
         [TestCase(typeof(ClassPublicNoProperties))]
+        [TestCase(typeof(AllPropsArePublicClassShouldBeClassifiedPublicDTO))]
         public void Tests_ShouldNotThrowException(Type dto)
         {
             var filter = CreateFilter();
@@ -229,6 +247,7 @@ namespace Razorsharp.Guard.Tests
         [TestCase(typeof(MixObjectsDTO))]
         [TestCase(typeof(CircularReferenceDTO))]
         [TestCase(typeof(RecordDTO))]
+        [TestCase(typeof(OnePropIsPublicClassShouldBeClassifiedRestrictedDTO))]
         public void Tests_ShouldThrowException(Type dto)
         {
             var filter = CreateFilter();

@@ -61,22 +61,30 @@ namespace Razorsharp.Guard
             _visited.Add(type);
 
             // class attribute
-            var classAttribute = type.GetCustomAttributes(typeof(ClassificationAttribute))
+            var classMaxSensitivity = type.GetCustomAttributes(typeof(ClassificationAttribute))
                 .Cast<ClassificationAttribute>()
                 .MaxBy(x => x.SensitivityLevel);
 
-            var classSensitivity = classAttribute?.SensitivityLevel ?? SensitivityLevel.Restricted;
+
+            var propertiesMaxSensitivity = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Select(p => p.GetCustomAttribute<ClassificationAttribute>()?.SensitivityLevel
+                 ?? SensitivityLevel.Restricted)
+                .Distinct()
+                .Cast<SensitivityLevel?>()
+                .Max();
+
 
                 Classifications.Add(new()
                 {
                     Type = type.FullName,
-                    SensitivityLevel = classSensitivity,
-                    Reason = classAttribute?.Reason ?? "not defined",
+                    SensitivityLevel = classMaxSensitivity?.SensitivityLevel ?? (propertiesMaxSensitivity ?? SensitivityLevel.Restricted),
+                    Reason = classMaxSensitivity?.Reason,
                     Depth = _depth,
                     AttributeLevel = AttributeLevel.Class
                 });
 
             // properties
+            var classSensitivity = classMaxSensitivity?.SensitivityLevel ?? SensitivityLevel.Restricted;
             foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 // attributes on properties
@@ -84,7 +92,7 @@ namespace Razorsharp.Guard
                 
                 Classifications.Add(new()
                 {
-                    Type = type.FullName,
+                    Type = $"{type.FullName}.{prop.Name}",
                     SensitivityLevel = propAttribute?.SensitivityLevel ?? classSensitivity,
                     Reason = propAttribute?.Reason,
                     Depth = _depth,
