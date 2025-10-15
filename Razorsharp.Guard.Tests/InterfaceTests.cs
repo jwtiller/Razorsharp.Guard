@@ -65,10 +65,29 @@ namespace Razorsharp.Guard.Tests
 
             filter.Classifications.MatchSnapshot();
         }
+
+        [Test]
+        public void ShouldNot_TriggerException_WhenInterfaceAndImplementationPropertyIsPublic()
+        {
+            var filter = CreateFilter();
+            var context = CreateContext(new Lorem());
+            Assert.DoesNotThrow(() => filter.OnResultExecuting(context));
+            filter.Classifications.MatchSnapshot();
+        }
+
+        [Test]
+        public void Should_TriggerException_WhenImplementationHasRestrictedProperty()
+        {
+            var filter = CreateFilter();
+            var context = CreateContext(new Lorem2());
+            Assert.Throws<RazorsharpGuardException>(() => filter.OnResultExecuting(context));
+            filter.Classifications.MatchSnapshot();
+        }
     }
 
     public interface IContactInfo
     {
+        [Restricted("email interface restricted")]
         string Email { get; set; }
         string Phone { get; set; }
     }
@@ -103,5 +122,27 @@ namespace Razorsharp.Guard.Tests
 
         [Confidential("Phone is confidential")]
         public string Phone { get; set; }
+    }
+
+    public interface IHello
+    {
+        [Public]
+        public string World { get; set; }
+    }
+
+    public class Lorem : IHello
+    {
+        [Public]
+        public string World { get; set; }
+    }
+
+    public interface IHello2 : IHello
+    {
+    }
+
+    public class Lorem2 : Lorem
+    {
+        [Restricted("this is restricted")]
+        public string Restricted { get; set; }
     }
 }

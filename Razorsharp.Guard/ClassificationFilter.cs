@@ -109,8 +109,6 @@ namespace Razorsharp.Guard
 
                     if (propActualType != null)
                         InspectType(instance, propActualType, depth + 1, propType);
-
-                    return; // avoid inspecting the interface
                 }
 
                 if (propType == typeof(string)
