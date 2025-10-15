@@ -24,57 +24,25 @@
     "AttributeLevel": "Property"
   },
   {
-    "Type": "Razorsharp.Guard.Tests.IContactInfo",
-    "ParentType": "Razorsharp.Guard.Tests.UserDTO",
-    "Reason": null,
+    "Type": "Razorsharp.Guard.Tests.ContactInfo",
+    "ParentType": "Razorsharp.Guard.Tests.IContactInfo",
+    "Reason": "Implements restricted contact data",
     "SensitivityLevel": "Restricted",
     "Depth": 1,
     "AttributeLevel": "Class"
   },
   {
-    "Type": "Razorsharp.Guard.Tests.IContactInfo.Email",
-    "ParentType": "Razorsharp.Guard.Tests.UserDTO",
+    "Type": "Razorsharp.Guard.Tests.ContactInfo.Email",
+    "ParentType": "Razorsharp.Guard.Tests.IContactInfo",
     "Reason": null,
     "SensitivityLevel": "Restricted",
     "Depth": 1,
     "AttributeLevel": "Property"
   },
   {
-    "Type": "Razorsharp.Guard.Tests.IContactInfo.Phone",
-    "ParentType": "Razorsharp.Guard.Tests.UserDTO",
+    "Type": "Razorsharp.Guard.Tests.ContactInfo.Phone",
+    "ParentType": "Razorsharp.Guard.Tests.IContactInfo",
     "Reason": null,
-    "SensitivityLevel": "Restricted",
-    "Depth": 1,
-    "AttributeLevel": "Property"
-  },
-  {
-    "Type": "Razorsharp.Guard.Tests.UserDTO.Address",
-    "ParentType": null,
-    "Reason": null,
-    "SensitivityLevel": "Public",
-    "Depth": 0,
-    "AttributeLevel": "Property"
-  },
-  {
-    "Type": "Razorsharp.Guard.Tests.Address",
-    "ParentType": "Razorsharp.Guard.Tests.UserDTO",
-    "Reason": null,
-    "SensitivityLevel": "Public",
-    "Depth": 1,
-    "AttributeLevel": "Class"
-  },
-  {
-    "Type": "Razorsharp.Guard.Tests.Address.Street",
-    "ParentType": "Razorsharp.Guard.Tests.UserDTO",
-    "Reason": null,
-    "SensitivityLevel": "Public",
-    "Depth": 1,
-    "AttributeLevel": "Property"
-  },
-  {
-    "Type": "Razorsharp.Guard.Tests.Address.ZipCode",
-    "ParentType": "Razorsharp.Guard.Tests.UserDTO",
-    "Reason": "May reveal location",
     "SensitivityLevel": "Restricted",
     "Depth": 1,
     "AttributeLevel": "Property"

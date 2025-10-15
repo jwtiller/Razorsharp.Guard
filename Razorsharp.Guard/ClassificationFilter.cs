@@ -27,7 +27,7 @@ namespace Razorsharp.Guard
             if (context.Result is not ObjectResult objectResult || objectResult.Value == null)
                 return;
 
-            InspectType(objectResult.Value.GetType());
+            InspectType(objectResult.Value, objectResult.Value.GetType());
             Evaluate(context);
         }
 
@@ -51,7 +51,7 @@ namespace Razorsharp.Guard
 
         }
 
-        private void InspectType(Type type, int depth = 0, Type? parentType = null)
+        private void InspectType(object instance, Type type, int depth = 0, Type? parentType = null)
         {
             if (type == null || _visited.Contains(type))
                 return;
@@ -102,6 +102,17 @@ namespace Razorsharp.Guard
                 // recursive
                 var propType = prop.PropertyType;
 
+                if (propType.IsInterface)
+                {
+                    var propValue = prop.GetValue(instance);
+                    var propActualType = propValue?.GetType();
+
+                    if (propActualType != null)
+                        InspectType(instance, propActualType, depth + 1, propType);
+
+                    return; // avoid inspecting the interface
+                }
+
                 if (propType == typeof(string)
                     || propType.IsPrimitive 
                     || propType == typeof(DateTime)
@@ -113,11 +124,11 @@ namespace Razorsharp.Guard
                 {
                     // if generic as List
                     var elementType = propType.GetGenericArguments()[0];
-                    InspectType(elementType, depth+1, type);
+                    InspectType(instance, elementType, depth+1, type);
                 }
                 else
                 {
-                    InspectType(propType, depth+1, type);
+                    InspectType(instance, propType, depth+1, type);
                 }
             }
         }
