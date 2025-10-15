@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Routing;
+using Snapshooter.NUnit;
 
 namespace Razorsharp.Guard.Tests
 {
@@ -224,6 +225,7 @@ namespace Razorsharp.Guard.Tests
             var filter = CreateFilter();
             var context = CreateContext(Activator.CreateInstance(dto));
             Assert.DoesNotThrow(() => filter.OnResultExecuting(context));
+            filter.Classifications.MatchSnapshot();
         }
 
 
@@ -253,6 +255,8 @@ namespace Razorsharp.Guard.Tests
             var filter = CreateFilter();
             var context = CreateContext(Activator.CreateInstance(dto));
             Assert.Throws<RazorsharpGuardException>(() => filter.OnResultExecuting(context));
+
+            filter.Classifications.MatchSnapshot();
         }
     }
 }

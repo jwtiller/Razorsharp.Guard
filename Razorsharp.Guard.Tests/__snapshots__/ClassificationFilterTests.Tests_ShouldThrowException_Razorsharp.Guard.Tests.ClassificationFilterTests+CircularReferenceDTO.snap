@@ -1,0 +1,18 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+CircularReferenceDTO",
+    "ParentType": null,
+    "Reason": "foo",
+    "SensitivityLevel": "Restricted",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+CircularReferenceDTO.A",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  }
+]

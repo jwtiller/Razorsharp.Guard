@@ -1,0 +1,34 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+AllPublicNestedDTO",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+AllPublicNestedDTO.Child",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+AllPublicDTO",
+    "ParentType": "Razorsharp.Guard.Tests.ClassificationFilterTests+AllPublicNestedDTO",
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 1,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+AllPublicDTO.Name",
+    "ParentType": "Razorsharp.Guard.Tests.ClassificationFilterTests+AllPublicNestedDTO",
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 1,
+    "AttributeLevel": "Property"
+  }
+]

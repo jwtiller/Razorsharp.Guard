@@ -1,0 +1,10 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+ClassPublicNoProperties",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  }
+]

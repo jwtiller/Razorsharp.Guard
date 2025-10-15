@@ -1,0 +1,26 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+MixedDTO",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+MixedDTO.Secret",
+    "ParentType": null,
+    "Reason": "Sensitive",
+    "SensitivityLevel": "Restricted",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+MixedDTO.Info",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  }
+]

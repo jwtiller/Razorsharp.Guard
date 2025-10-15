@@ -1,0 +1,26 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+AllPropsArePublicClassShouldBeClassifiedPublicDTO",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+AllPropsArePublicClassShouldBeClassifiedPublicDTO.A",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+AllPropsArePublicClassShouldBeClassifiedPublicDTO.B",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  }
+]

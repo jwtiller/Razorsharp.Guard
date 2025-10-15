@@ -1,0 +1,10 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+ConfidentialEmptyDTO",
+    "ParentType": null,
+    "Reason": "foo",
+    "SensitivityLevel": "Confidential",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  }
+]

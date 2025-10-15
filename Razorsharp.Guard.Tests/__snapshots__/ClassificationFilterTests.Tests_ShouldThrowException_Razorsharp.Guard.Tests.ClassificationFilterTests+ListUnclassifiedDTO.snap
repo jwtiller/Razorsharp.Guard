@@ -1,0 +1,34 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+ListUnclassifiedDTO",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+ListUnclassifiedDTO.Persons",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+Person",
+    "ParentType": "Razorsharp.Guard.Tests.ClassificationFilterTests+ListUnclassifiedDTO",
+    "Reason": null,
+    "SensitivityLevel": "Restricted",
+    "Depth": 1,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+Person.Name",
+    "ParentType": "Razorsharp.Guard.Tests.ClassificationFilterTests+ListUnclassifiedDTO",
+    "Reason": null,
+    "SensitivityLevel": "Restricted",
+    "Depth": 1,
+    "AttributeLevel": "Property"
+  }
+]

@@ -1,0 +1,18 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+NullableDTO",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+NullableDTO.Optional",
+    "ParentType": null,
+    "Reason": "Optional data",
+    "SensitivityLevel": "Confidential",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  }
+]

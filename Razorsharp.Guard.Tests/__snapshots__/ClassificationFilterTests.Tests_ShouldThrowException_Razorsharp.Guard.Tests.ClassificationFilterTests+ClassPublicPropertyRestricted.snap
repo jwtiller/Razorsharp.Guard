@@ -1,0 +1,18 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+ClassPublicPropertyRestricted",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+ClassPublicPropertyRestricted.Secret",
+    "ParentType": null,
+    "Reason": "Overrules class",
+    "SensitivityLevel": "Restricted",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  }
+]

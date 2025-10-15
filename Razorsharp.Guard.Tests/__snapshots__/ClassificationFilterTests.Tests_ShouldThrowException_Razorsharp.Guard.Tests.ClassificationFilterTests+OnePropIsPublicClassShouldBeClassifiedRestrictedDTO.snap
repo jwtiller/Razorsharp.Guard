@@ -1,0 +1,26 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+OnePropIsPublicClassShouldBeClassifiedRestrictedDTO",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Restricted",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+OnePropIsPublicClassShouldBeClassifiedRestrictedDTO.A",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+OnePropIsPublicClassShouldBeClassifiedRestrictedDTO.B",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Restricted",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  }
+]

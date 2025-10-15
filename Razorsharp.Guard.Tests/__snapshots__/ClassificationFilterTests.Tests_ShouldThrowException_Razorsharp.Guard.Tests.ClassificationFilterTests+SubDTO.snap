@@ -1,0 +1,10 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+SubDTO",
+    "ParentType": null,
+    "Reason": "base",
+    "SensitivityLevel": "Restricted",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  }
+]

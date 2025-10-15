@@ -1,0 +1,34 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+WithNestedDTO",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+WithNestedDTO.Nested",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+NestedConfidential",
+    "ParentType": "Razorsharp.Guard.Tests.ClassificationFilterTests+WithNestedDTO",
+    "Reason": "Nested confidential data",
+    "SensitivityLevel": "Confidential",
+    "Depth": 1,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+NestedConfidential.Secret",
+    "ParentType": "Razorsharp.Guard.Tests.ClassificationFilterTests+WithNestedDTO",
+    "Reason": null,
+    "SensitivityLevel": "Confidential",
+    "Depth": 1,
+    "AttributeLevel": "Property"
+  }
+]

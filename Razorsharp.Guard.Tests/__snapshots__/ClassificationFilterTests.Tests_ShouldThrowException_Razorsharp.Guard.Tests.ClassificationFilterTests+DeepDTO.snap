@@ -1,0 +1,50 @@
+﻿[
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+DeepDTO",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+DeepDTO.Contact",
+    "ParentType": null,
+    "Reason": null,
+    "SensitivityLevel": "Public",
+    "Depth": 0,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+Contact",
+    "ParentType": "Razorsharp.Guard.Tests.ClassificationFilterTests+DeepDTO",
+    "Reason": null,
+    "SensitivityLevel": "Restricted",
+    "Depth": 1,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+Contact.Inner",
+    "ParentType": "Razorsharp.Guard.Tests.ClassificationFilterTests+DeepDTO",
+    "Reason": null,
+    "SensitivityLevel": "Restricted",
+    "Depth": 1,
+    "AttributeLevel": "Property"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+DeepNested",
+    "ParentType": "Razorsharp.Guard.Tests.ClassificationFilterTests+Contact",
+    "Reason": null,
+    "SensitivityLevel": "Restricted",
+    "Depth": 2,
+    "AttributeLevel": "Class"
+  },
+  {
+    "Type": "Razorsharp.Guard.Tests.ClassificationFilterTests+DeepNested.Hidden",
+    "ParentType": "Razorsharp.Guard.Tests.ClassificationFilterTests+Contact",
+    "Reason": "Deep restricted",
+    "SensitivityLevel": "Restricted",
+    "Depth": 2,
+    "AttributeLevel": "Property"
+  }
+]
