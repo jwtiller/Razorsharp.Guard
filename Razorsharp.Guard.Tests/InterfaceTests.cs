@@ -100,6 +100,8 @@ namespace Razorsharp.Guard.Tests
     public class ContactInfo : IContactInfo
     {
         public string Email { get; set; }
+
+        [Confidential("Phone is confidential")]
         public string Phone { get; set; }
     }
 }

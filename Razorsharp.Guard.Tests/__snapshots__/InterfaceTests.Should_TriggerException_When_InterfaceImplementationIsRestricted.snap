@@ -42,8 +42,8 @@
   {
     "Type": "Razorsharp.Guard.Tests.ContactInfo.Phone",
     "ParentType": "Razorsharp.Guard.Tests.IContactInfo",
-    "Reason": null,
-    "SensitivityLevel": "Restricted",
+    "Reason": "Phone is confidential",
+    "SensitivityLevel": "Confidential",
     "Depth": 1,
     "AttributeLevel": "Property"
   }
