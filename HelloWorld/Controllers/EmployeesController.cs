@@ -32,5 +32,20 @@ namespace HelloWorld.Controllers
 
             return Ok(employee);
         }
+
+        [HttpGet("internalasync")]
+        public async Task<ActionResult<FullEmployeeDTO>> GetPublicEmployeAsync()
+        {
+            await Task.Delay(10);
+            var employee = new FullEmployeeDTO
+            {
+                Name = "Alice Jensen",
+                Department = "Engineering",
+                Salary = 850000,
+                Email = "alice@company.no"
+            };
+
+            return employee;
+        }
     }
 }
