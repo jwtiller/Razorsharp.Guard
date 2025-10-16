@@ -15,7 +15,7 @@ namespace HelloWorld
             builder.Services.AddControllers();
             builder.Services.AddRazorsharpGuard((options) =>
             {
-                options.GuardMode = GuardMode.Audit;
+                options.GuardMode = GuardMode.ThrowException;
                 options.Audit = (logger, httpContext, evt) =>
                 {
                     var user = httpContext.User?.Identity?.Name ?? "anonymous";

@@ -62,7 +62,6 @@ namespace Razorsharp.Guard.Tests
             });
 
             Assert.Throws<RazorsharpGuardException>(() => filter.OnResultExecuting(context));
-
             filter.Classifications.MatchSnapshot();
         }
 

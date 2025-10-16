@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using System.Runtime;
+﻿using System.Collections.Concurrent;
+using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
@@ -8,6 +8,9 @@ namespace Razorsharp.Guard
 {
     public class ClassificationFilter : IResultFilter
     {
+        private static readonly ConcurrentDictionary<Type, List<ClassificationResult>> _cache = new();
+
+
         private readonly HashSet<Type> _visited = new();
         public readonly List<ClassificationResult> Classifications = new();
         private readonly GuardOptions _guardOptions;
@@ -27,8 +30,23 @@ namespace Razorsharp.Guard
             if (context.Result is not ObjectResult objectResult || objectResult.Value == null)
                 return;
 
-            InspectType(objectResult.Value, objectResult.Value.GetType());
-            Evaluate(context);
+            if (_cache.TryGetValue(objectResult.Value.GetType(), out var cached))
+            {
+                Classifications.AddRange(cached);
+                return;
+            }
+
+            try
+            {
+                InspectType(objectResult.Value, objectResult.Value.GetType());
+                Evaluate(context);
+            }
+            finally
+            {
+                _cache.TryAdd(objectResult.Value.GetType(), Classifications);
+            }
+
+           
         }
 
         public void OnResultExecuted(ResultExecutedContext context) { }
