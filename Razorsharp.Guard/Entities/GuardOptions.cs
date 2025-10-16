@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Razorsharp.Guard
+namespace Razorsharp.Guard.Entities
 {
     public class GuardOptions
     {

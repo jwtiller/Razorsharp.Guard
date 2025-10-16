@@ -1,4 +1,6 @@
-﻿namespace Razorsharp.Guard.Tests
+﻿using Razorsharp.Guard.Entities;
+
+namespace Razorsharp.Guard.Tests
 {
     [TestFixture]
     public class AuditDefinedInOptionsButNoLoggerTests

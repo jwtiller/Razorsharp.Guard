@@ -1,5 +1,5 @@
-
-using Razorsharp.Guard;
+using Razorsharp.Guard.Entities;
+using Razorsharp.Guard.Infrastructure;
 
 namespace HelloWorld
 {

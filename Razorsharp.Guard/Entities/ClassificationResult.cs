@@ -1,4 +1,4 @@
-﻿namespace Razorsharp.Guard
+﻿namespace Razorsharp.Guard.Entities
 {
     public class ClassificationResult
     {

@@ -1,4 +1,6 @@
-﻿namespace Razorsharp.Guard
+﻿using Razorsharp.Guard.Entities;
+
+namespace Razorsharp.Guard
 {
 
     public class RazorsharpGuardException : Exception

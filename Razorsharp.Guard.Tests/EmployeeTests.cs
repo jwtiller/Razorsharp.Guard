@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System.Threading.Tasks.Sources;
 using Microsoft.Extensions.Logging.Abstractions;
+using Razorsharp.Guard.Entities;
 
 namespace Razorsharp.Guard.Tests
 {

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Routing;
 using Snapshooter.NUnit;
+using Razorsharp.Guard.Entities;
 
 namespace Razorsharp.Guard.Tests
 {

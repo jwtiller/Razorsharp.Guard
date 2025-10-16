@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Razorsharp.Guard.Entities;
 
-namespace Razorsharp.Guard
+namespace Razorsharp.Guard.Infrastructure
 {
     public static class ServiceCollectionExtensions
     {

@@ -1,4 +1,4 @@
-﻿namespace Razorsharp.Guard
+﻿namespace Razorsharp.Guard.Entities
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property)]
     public abstract class ClassificationAttribute : Attribute

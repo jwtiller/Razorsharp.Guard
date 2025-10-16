@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing;
 using System.Threading.Tasks.Sources;
 using Microsoft.Extensions.Logging.Abstractions;
 using Snapshooter.NUnit;
+using Razorsharp.Guard.Entities;
 
 namespace Razorsharp.Guard.Tests
 {
