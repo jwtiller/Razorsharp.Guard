@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Razorsharp.Guard.CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "--path C:\\code\\Razorsharp.Guard\\HelloWorld\\bin\\Debug\\net8.0"
+    }
+  }
+}

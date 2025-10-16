@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWorld", "HelloWorld\He
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Razorsharp.Guard.Tests", "Razorsharp.Guard.Tests\Razorsharp.Guard.Tests.csproj", "{53EB6DCD-8445-4A76-890D-03E55B1D9680}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld.Nuget", "HelloWorld.Nuget\HelloWorld.Nuget.csproj", "{8B2FEC69-3149-4F83-B7E3-49138A2BB158}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWorld.Nuget", "HelloWorld.Nuget\HelloWorld.Nuget.csproj", "{8B2FEC69-3149-4F83-B7E3-49138A2BB158}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Razorsharp.Guard.CLI", "Razorsharp.Guard.CLI\Razorsharp.Guard.CLI.csproj", "{03904B34-598A-460F-B30F-41C7E1CFEC72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{8B2FEC69-3149-4F83-B7E3-49138A2BB158}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B2FEC69-3149-4F83-B7E3-49138A2BB158}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B2FEC69-3149-4F83-B7E3-49138A2BB158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03904B34-598A-460F-B30F-41C7E1CFEC72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03904B34-598A-460F-B30F-41C7E1CFEC72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03904B34-598A-460F-B30F-41C7E1CFEC72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03904B34-598A-460F-B30F-41C7E1CFEC72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
