@@ -1,29 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Microsoft.AspNetCore.Mvc;
-using System.CommandLine;
+﻿using System.CommandLine;
 using System.Reflection;
-using Razorsharp.Guard.Entities;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.Runtime.Loader;
 
 namespace Razorsharp.Guard.CLI
 {
     internal class Program
     {
-        static async Task<int> Main(string[] args)
+        static int Main(string[] args)
         {
             var path = new Option<string>("--path")
             {
                 Required = false,
                 DefaultValueFactory = _ => Directory.GetCurrentDirectory()
             };
-            var root = new RootCommand("generate report") { path };
+
+            var root = new RootCommand("Generate Razorsharp Guard report") { path };
             root.TreatUnmatchedTokensAsErrors = false;
+
             root.SetAction(pr =>
             {
                 var p = pr.GetValue(path);
+
                 if (string.IsNullOrEmpty(p) || (!Directory.Exists(p) && !File.Exists(p)))
                 {
-                    Console.Error.WriteLine("Directory or assembly does not exist");
+                    Console.Error.WriteLine("Directory or assembly does not exist.");
                     return 1;
                 }
 
@@ -32,37 +32,67 @@ namespace Razorsharp.Guard.CLI
 
                 if (isFile && Path.GetExtension(p) != ".dll")
                 {
-                    Console.Error.WriteLine("File extension for path is not dll");
+                    Console.Error.WriteLine("Path must be a .dll file.");
                     return 1;
                 }
 
-                var assemblies = new List<string>();
-                if (isDirectory)
-                    assemblies.AddRange(Directory.GetFiles(p, "*.dll"));
-                else
-                    assemblies.Add(p);
+                var assemblies = isDirectory
+                    ? Directory.GetFiles(p, "*.dll").ToList()
+                    : new List<string> { p };
 
+                Console.WriteLine($"Found {assemblies.Count} assemblies.");
 
-
-                var runtimeDir = System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory();
-                var dir = Path.GetDirectoryName(p)!;
-
-                // legg til både runtime og prosjektets dll-er i resolveren
-                var allDlls = Directory.GetFiles(runtimeDir, "*.dll")
-                    .Concat(Directory.GetFiles(dir, "*.dll"))
-                    .ToList();
-
-                var resolver = new PathAssemblyResolver(allDlls);
-                foreach (var assembly in assemblies)
+                foreach (var assemblyPath in assemblies)
                 {
-                    using var mlc = new MetadataLoadContext(resolver);
-                    var asm = mlc.LoadFromAssemblyPath(assembly);
-                    var controllerTypes = asm.GetTypes()
-                        .Where(t => t.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase))
-                        .ToList();
-
-                    foreach (var controllerType in controllerTypes)
+                    try
                     {
+                        Console.WriteLine($"Scanning: {Path.GetFileName(assemblyPath)}");
+
+                        var context = new AssemblyLoadContext("rsguard-scan", isCollectible: true);
+                        context.Resolving += (ctx, name) =>
+                        {
+                            var candidate = Path.Combine(Path.GetDirectoryName(assemblyPath)!, name.Name + ".dll");
+                            return File.Exists(candidate)
+                                ? ctx.LoadFromAssemblyPath(candidate)
+                                : null;
+                        };
+
+                        var asm = context.LoadFromAssemblyPath(Path.GetFullPath(assemblyPath));
+
+                        var guardAsm = asm.GetReferencedAssemblies()
+                            .Select(a =>
+                            {
+                                try { return context.LoadFromAssemblyName(a); }
+                                catch { return null; }
+                            })
+                            .FirstOrDefault(a => a?.GetName().Name == "Razorsharp.Guard");
+
+                        if (guardAsm == null)
+                        {
+                            Console.WriteLine("No reference to Razorsharp.Guard found.");
+                            context.Unload();
+                            continue;
+                        }
+
+
+                        var describeType = guardAsm.GetType("Razorsharp.Guard.SelfDescribe");
+                        var method = describeType?.GetMethod("DescribeSelf", BindingFlags.Public | BindingFlags.Static);
+
+                        if (method == null)
+                        {
+                            Console.WriteLine("DescribeSelf() not found in Razorsharp.Guard.");
+                            context.Unload();
+                            continue;
+                        }
+
+                        var json = (string)method.Invoke(null, new object?[] { assemblyPath })!;
+                        Console.WriteLine(json);
+
+                        context.Unload();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.Error.WriteLine($"Failed to scan {assemblyPath}: {ex.Message}");
                     }
                 }
 
@@ -71,6 +101,5 @@ namespace Razorsharp.Guard.CLI
 
             return root.Parse(args).Invoke();
         }
-
     }
 }
