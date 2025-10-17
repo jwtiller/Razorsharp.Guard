@@ -47,27 +47,7 @@ namespace Razorsharp.Guard.CLI
                     try
                     {
                         Console.WriteLine($"Scanning: {Path.GetFileName(assemblyPath)}");
-
-  
-                        var asm = Assembly.LoadFrom(assemblyPath);
-                        var guardAsm = Assembly.LoadFrom(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Razorsharp.Guard.dll"));
-                        if (guardAsm == null)
-                        {
-                            Console.WriteLine("No reference to Razorsharp.Guard found.");
-                            continue;
-                        }
-
-
-                        var describeType = guardAsm.GetType("Razorsharp.Guard.SelfDescribe");
-                        var method = describeType?.GetMethod("DescribeSelf", BindingFlags.Public | BindingFlags.Static);
-
-                        if (method == null)
-                        {
-                            Console.WriteLine("DescribeSelf() not found in Razorsharp.Guard.");
-                            continue;
-                        }
-
-                        var json = (string)method.Invoke(null, new object?[] { asm })!;
+                        var json = CecilDescribe.DescribeAssembly(assemblyPath, Assembly.LoadFrom(assemblyPath));
                         Console.WriteLine(json);
                     }
                     catch (Exception ex)
