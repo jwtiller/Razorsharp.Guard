@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Razorsharp.Guard\Razorsharp.Guard.csproj" />
+    <ProjectReference Include="..\HelloWorld.Entities\HelloWorld.Entities.csproj" />
   </ItemGroup>
 
 </Project>

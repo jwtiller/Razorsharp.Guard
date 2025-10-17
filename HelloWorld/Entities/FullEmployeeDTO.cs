@@ -1,4 +1,5 @@
-﻿using Razorsharp.Guard.Entities;
+﻿using HelloWorld.Common.Entities;
+using Razorsharp.Guard.Entities;
 
 namespace HelloWorld.Entities
 {

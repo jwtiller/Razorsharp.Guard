@@ -1,6 +1,6 @@
 ﻿using Razorsharp.Guard.Entities;
 
-namespace HelloWorld.Entities
+namespace HelloWorld.Common.Entities
 {
     [Public]
     public class BaseEmployeeDTO

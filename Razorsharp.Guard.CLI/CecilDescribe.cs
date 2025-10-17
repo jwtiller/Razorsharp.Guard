@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Mono.Cecil;
 using Razorsharp.Guard.Entities;
 using AssemblyDefinition = Mono.Cecil.AssemblyDefinition;
@@ -48,9 +47,8 @@ namespace Razorsharp.Guard.CLI
                     var classification = new List<ClassificationResult>();
                     try
                     {
-                        var rt = asmDef.MainModule.GetType(returnType);
-                        var typeDef = asm.GetType(rt.FullName);
-                        if (rt != null)
+                        var typeDef = CecilTypeResolver.ResolveSystemType(asmDef, returnType);
+                        if (typeDef != null)
                             classification = TypeClassification.Inspect(null, typeDef);
                     }
                     catch

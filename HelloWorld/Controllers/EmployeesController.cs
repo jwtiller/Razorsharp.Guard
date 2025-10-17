@@ -1,4 +1,5 @@
-﻿using HelloWorld.Entities;
+﻿using HelloWorld.Common.Entities;
+using HelloWorld.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HelloWorld.Controllers
