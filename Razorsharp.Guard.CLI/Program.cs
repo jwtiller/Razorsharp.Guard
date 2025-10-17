@@ -48,29 +48,12 @@ namespace Razorsharp.Guard.CLI
                     {
                         Console.WriteLine($"Scanning: {Path.GetFileName(assemblyPath)}");
 
-                        var context = new AssemblyLoadContext("rsguard-scan", isCollectible: true);
-                        context.Resolving += (ctx, name) =>
-                        {
-                            var candidate = Path.Combine(Path.GetDirectoryName(assemblyPath)!, name.Name + ".dll");
-                            return File.Exists(candidate)
-                                ? ctx.LoadFromAssemblyPath(candidate)
-                                : null;
-                        };
-
-                        var asm = context.LoadFromAssemblyPath(Path.GetFullPath(assemblyPath));
-
-                        var guardAsm = asm.GetReferencedAssemblies()
-                            .Select(a =>
-                            {
-                                try { return context.LoadFromAssemblyName(a); }
-                                catch { return null; }
-                            })
-                            .FirstOrDefault(a => a?.GetName().Name == "Razorsharp.Guard");
-
+  
+                        var asm = Assembly.LoadFrom(assemblyPath);
+                        var guardAsm = Assembly.LoadFrom(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Razorsharp.Guard.dll"));
                         if (guardAsm == null)
                         {
                             Console.WriteLine("No reference to Razorsharp.Guard found.");
-                            context.Unload();
                             continue;
                         }
 
@@ -81,14 +64,11 @@ namespace Razorsharp.Guard.CLI
                         if (method == null)
                         {
                             Console.WriteLine("DescribeSelf() not found in Razorsharp.Guard.");
-                            context.Unload();
                             continue;
                         }
 
-                        var json = (string)method.Invoke(null, new object?[] { assemblyPath })!;
+                        var json = (string)method.Invoke(null, new object?[] { asm })!;
                         Console.WriteLine(json);
-
-                        context.Unload();
                     }
                     catch (Exception ex)
                     {

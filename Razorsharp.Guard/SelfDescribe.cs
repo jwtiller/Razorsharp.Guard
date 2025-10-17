@@ -20,12 +20,8 @@ namespace Razorsharp.Guard
             /// Scans this assembly for API controllers, extracts their HTTP methods, paths and return types,
             /// runs classification analysis, and returns JSON.
             /// </summary>
-            public static string DescribeSelf(string assemblyPath = null)
+            public static string DescribeSelf(Assembly asm)
             {
-                var asm = string.IsNullOrEmpty(assemblyPath) 
-                    ? Assembly.GetEntryAssembly()
-                    : Assembly.LoadFile(assemblyPath);
-
                 var results = new List<ApiReport>();
 
                 var controllers = asm.GetTypes()
