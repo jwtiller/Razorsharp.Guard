@@ -16,8 +16,8 @@ namespace Razorsharp.Guard.Tests
         private List<string> _audits = new();
         private ClassificationFilter CreateFilter() => new ClassificationFilter(
             new GuardOptions() { 
-            GuardMode = GuardMode.Audit,
-            Audit = (logger,context,evt) => {
+            GuardMode = GuardMode.CallbackOnly,
+            Callback = (logger,context,evt) => {
                 var details = string.Join(',',evt.Classifications.Select(c => $"{c.Type}[{c.SensitivityLevel}={c.Reason}]"));
                 _audits.Add($"Sensitive data accessed: {details}"); }
             }, new NullLogger<ClassificationFilter>());

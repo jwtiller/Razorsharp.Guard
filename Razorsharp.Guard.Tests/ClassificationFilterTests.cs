@@ -12,7 +12,7 @@ namespace Razorsharp.Guard.Tests
     [TestFixture]
     public class ClassificationFilterTests
     {
-        private ClassificationFilter CreateFilter() => new ClassificationFilter(new GuardOptions() { GuardMode = GuardMode.ThrowException });
+        private ClassificationFilter CreateFilter() => new ClassificationFilter(new GuardOptions() { GuardMode = GuardMode.ThrowExceptionAndCallback });
 
         private ResultExecutingContext CreateContext(object dto)
         {

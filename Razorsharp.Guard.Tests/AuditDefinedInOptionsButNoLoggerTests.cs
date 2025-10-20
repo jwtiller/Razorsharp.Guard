@@ -13,8 +13,8 @@ namespace Razorsharp.Guard.Tests
                 new ClassificationFilter(
             new GuardOptions()
             {
-                GuardMode = GuardMode.Audit,
-                Audit = (logger, context, evt) => { }
+                GuardMode = GuardMode.CallbackOnly,
+                Callback = (logger, context, evt) => { }
             }, null);
             });
 

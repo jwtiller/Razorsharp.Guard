@@ -7,7 +7,7 @@ It ensures that no sensitive data is accidentally exposed through API responses.
 
 - 🔒 **Fail-safe defaults** – all unclassified data is treated as `Restricted`
 - 🏷️ **Attribute-driven** – annotate your DTOs with `[Public]`, `[Confidential("reason")]`, `[Restricted("reason")]`
-- 🌐 **Configurable** – policies can differ for `GuardMode.Audit` vs `GuardMode.ThrowException`
+- 🌐 **Configurable** – policies can differ for `GuardMode.CallbackOnly` vs `GuardMode.ThrowExceptionAndCallback`
 - 📜 **Audit trail** – every sensitive access can be logged for compliance (ISO 27001, NIS2, GDPR)
 
 ---
@@ -32,10 +32,10 @@ builder.Services.AddControllers();
 builder.Services.AddRazorsharpGuard((options) =>
 {
     // Define context for this application
-    options.Context = GuardContext.ThrowException; // default Audit that will not throw exception
+    options.Context = GuardContext.ThrowExceptionAndCallback; // default CallbackOnly that will not throw exception
 
     // Define what happens when sensitive data is detected
-                options.Audit = (logger, httpContext, evt) =>
+                options.Callback = (logger, httpContext, evt) =>
                 {
                     var user = httpContext.User?.Identity?.Name ?? "anonymous";
                     var path = httpContext.Request.Path;
@@ -87,8 +87,8 @@ public class CustomerDTO
 }
 ```
 
-- If an controller and GuardMode.ThrowException returns `SensitiveDTO`, the response is blocked and a `RazorsharpGuardException` is thrown.  
-- If the same DTO is returned and GuardMode.Audit, the response is allowed but logged for audit.
+- If an controller and GuardMode.ThrowExceptionAndCallback returns `SensitiveDTO`, the response is blocked and a `RazorsharpGuardException` is thrown.  
+- If the same DTO is returned and GuardMode.CallbackOnly, the response is allowed but logged for audit.
 
 ---
 

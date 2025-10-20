@@ -5,7 +5,7 @@ namespace Razorsharp.Guard.Entities
 {
     public class GuardOptions
     {
-        public GuardMode GuardMode { get; set; } = GuardMode.Audit;
-        public Action<ILogger, HttpContext, GuardEvent>? Audit { get; set; }
+        public GuardMode GuardMode { get; set; } = GuardMode.CallbackOnly;
+        public Action<ILogger, HttpContext, GuardEvent>? Callback { get; set; }
     }
 }

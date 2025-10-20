@@ -19,7 +19,7 @@ namespace Razorsharp.Guard
             _guardOptions = guardOptions ?? new();
             _logger = logger;
 
-            if (_guardOptions.Audit != null && _logger == null)
+            if (_guardOptions.Callback != null && _logger == null)
                 throw new InvalidOperationException(
                     $"Razorsharp Guard has auditing enabled in options, but no logger is registered in the dependency injection container.");
         }
@@ -60,9 +60,9 @@ namespace Razorsharp.Guard
             if (!filteredClassifications.Any())
                 return;
 
-            _guardOptions.Audit?.Invoke(_logger!, context.HttpContext, new GuardEvent(filteredClassifications));
+            _guardOptions.Callback?.Invoke(_logger!, context.HttpContext, new GuardEvent(filteredClassifications));
 
-            if (_guardOptions.GuardMode == GuardMode.ThrowException)
+            if (_guardOptions.GuardMode == GuardMode.ThrowExceptionAndCallback)
                 throw new RazorsharpGuardException(
                     "Razorsharp Guard blocked response: data classified above 'Public' was detected.",
                     Classifications);

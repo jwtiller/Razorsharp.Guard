@@ -2,7 +2,7 @@
 {
     public enum GuardMode
     {
-        Audit,
-        ThrowException
+        CallbackOnly,
+        ThrowExceptionAndCallback
     }
 }
