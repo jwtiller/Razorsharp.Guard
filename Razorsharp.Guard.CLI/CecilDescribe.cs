@@ -23,7 +23,7 @@ namespace Razorsharp.Guard.CLI
         /// Reads assembly metadata using Mono.Cecil — no dependencies need to be loaded.
         /// Finds controllers, HTTP methods, routes, and return types, and emits a JSON report.
         /// </summary>
-        public static string DescribeAssembly(string assemblyPath, System.Reflection.Assembly asm)
+        public static List<ApiReport> DescribeAssembly(string assemblyPath, System.Reflection.Assembly asm)
         {
             if (!File.Exists(assemblyPath))
                 throw new FileNotFoundException("Assembly not found", assemblyPath);
@@ -66,9 +66,7 @@ namespace Razorsharp.Guard.CLI
                     });
                 }
             }
-
-            var opts = new JsonSerializerOptions { WriteIndented = true };
-            return JsonSerializer.Serialize(results, opts);
+            return results;
         }
 
         private static string? GetHttpVerb(MethodDefinition method)

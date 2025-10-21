@@ -1,6 +1,6 @@
 ﻿using System.CommandLine;
 using System.Reflection;
-using System.Runtime.Loader;
+using System.Text.Json;
 
 namespace Razorsharp.Guard.CLI
 {
@@ -47,8 +47,13 @@ namespace Razorsharp.Guard.CLI
                     try
                     {
                         Console.WriteLine($"Scanning: {Path.GetFileName(assemblyPath)}");
-                        var json = CecilDescribe.DescribeAssembly(assemblyPath, Assembly.LoadFrom(assemblyPath));
+                        var result = CecilDescribe.DescribeAssembly(assemblyPath, Assembly.LoadFrom(assemblyPath));
+
+                        var opts = new JsonSerializerOptions { WriteIndented = true };
+                        var json = JsonSerializer.Serialize(result, opts);
+
                         Console.WriteLine(json);
+                        File.WriteAllText($"report-{Guid.NewGuid()}.json",json);
                     }
                     catch (Exception ex)
                     {
