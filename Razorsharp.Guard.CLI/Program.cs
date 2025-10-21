@@ -48,12 +48,16 @@ namespace Razorsharp.Guard.CLI
                     {
                         Console.WriteLine($"Scanning: {Path.GetFileName(assemblyPath)}");
                         var result = CecilDescribe.DescribeAssembly(assemblyPath, Assembly.LoadFrom(assemblyPath));
+                        var mermaid = MermaidGenerator.BuildMermaidGraph(result);
+
+                        var reportId = Guid.NewGuid();
+                        File.WriteAllText($"mermaid-{reportId}.mmd", mermaid);
 
                         var opts = new JsonSerializerOptions { WriteIndented = true };
                         var json = JsonSerializer.Serialize(result, opts);
 
                         Console.WriteLine(json);
-                        File.WriteAllText($"report-{Guid.NewGuid()}.json",json);
+                        File.WriteAllText($"report-{reportId}.json",json);
                     }
                     catch (Exception ex)
                     {
