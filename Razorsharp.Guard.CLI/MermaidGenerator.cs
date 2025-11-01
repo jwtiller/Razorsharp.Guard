@@ -14,12 +14,13 @@ namespace Razorsharp.Guard.CLI
         public static string BuildMermaidGraph(IEnumerable<ApiReport> reports)
         {
             var sb = new StringBuilder();
-            sb.AppendLine("graph TD");
+            sb.AppendLine("``` mermaid");
+            sb.AppendLine($"    graph TD");
 
             foreach (var controllerGroup in reports.GroupBy(r => r.Controller))
             {
                 var controllerName = Sanitize(controllerGroup.Key);
-                sb.AppendLine($"    {controllerName}[{controllerGroup.Key}]");
+                sb.AppendLine($"        {controllerName}[{controllerGroup.Key}]");
 
                 foreach (var report in controllerGroup)
                 {
@@ -33,18 +34,19 @@ namespace Razorsharp.Guard.CLI
                         : SensitivityLevel.Public;
                     var colorEmoji = SensitivityLabel(maxSensitivity);
 
-                    sb.AppendLine($"    {methodId} --> {returnNodeId}[{report.ReturnType}: {colorEmoji}]");
+                    sb.AppendLine($"        {methodId} --> {returnNodeId}[{report.ReturnType}: {colorEmoji}]");
 
                     foreach (var cls in report.Classification.Where(c => c.AttributeLevel == AttributeLevel.Property))
                     {
                         var propId = $"{returnNodeId}_{Sanitize(cls.Type)}";
                         var emoji = SensitivityLabel(cls.SensitivityLevel);
                         var propLabel = cls.Type.Split('.').Last();
-                        sb.AppendLine($"    {returnNodeId} --> {propId}[{propLabel}: {emoji}]");
+                        sb.AppendLine($"        {returnNodeId} --> {propId}[{propLabel}: {emoji}]");
                     }
                 }
             }
 
+            sb.AppendLine("```");
             return sb.ToString();
         }
 

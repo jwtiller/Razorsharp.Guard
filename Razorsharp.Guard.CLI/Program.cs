@@ -55,7 +55,7 @@ namespace Razorsharp.Guard.CLI
                         var mermaid = MermaidGenerator.BuildMermaidGraph(result);
 
                         var reportId = Guid.NewGuid();
-                        File.WriteAllText($"mermaid-{reportId}.mmd", mermaid);
+                        File.WriteAllText($"graph-{reportId}.md", mermaid);
 
                         var opts = new JsonSerializerOptions { WriteIndented = true };
                         var json = JsonSerializer.Serialize(result, opts);
