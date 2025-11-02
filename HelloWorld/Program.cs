@@ -1,3 +1,4 @@
+using Razorsharp.Guard;
 using Razorsharp.Guard.Entities;
 using Razorsharp.Guard.Infrastructure;
 
@@ -8,11 +9,13 @@ namespace HelloWorld
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             builder.Logging.AddProvider(new FileLoggerProvider("razosharp-guard-audit.log"));
 
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddRazorsharpLoggerRedaction();
             builder.Services.AddRazorsharpGuard((options) =>
             {
                 options.GuardMode = GuardMode.ThrowExceptionAndCallback;
@@ -40,11 +43,16 @@ namespace HelloWorld
                 };
             });
 
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            
+
             var app = builder.Build();
+
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

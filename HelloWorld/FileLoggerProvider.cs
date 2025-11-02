@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System.IO;
-
-public class FileLoggerProvider : ILoggerProvider
+﻿public class FileLoggerProvider : ILoggerProvider
 {
     private readonly string _filePath;
     private readonly object _lock = new();
@@ -31,11 +28,53 @@ public class FileLoggerProvider : ILoggerProvider
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
         {
-            var message = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} [{logLevel}] {formatter(state, exception)}";
+            var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            var message = $"{timestamp} [{logLevel}] ";
+
+            // if structure ex {@employee}
+            if (state is IEnumerable<KeyValuePair<string, object?>> kvps)
+            {
+                var parts = kvps
+                    .Where(kv => kv.Key != "{OriginalFormat}")
+                    .Select(kv =>
+                    {
+                        var value = FormatValue(kv.Value);
+                        return $"{kv.Key}={value}";
+                    });
+
+                message += string.Join(", ", parts);
+            }
+            else
+            {
+                // fallback
+                message += formatter(state, exception);
+            }
+
+            if (exception != null)
+                message += Environment.NewLine + exception;
+
             lock (_lock)
             {
                 File.AppendAllText(_filePath, message + Environment.NewLine);
             }
         }
+
+        private static string FormatValue(object? value)
+        {
+            if (value == null) return "null";
+
+            var type = value.GetType();
+
+           
+            if (!type.IsPrimitive && type != typeof(string))
+            {
+                var props = type.GetProperties()
+                    .Select(p => $"{p.Name}={p.GetValue(value) ?? "null"}");
+                return "{" + string.Join(", ", props) + "}";
+            }
+
+            return value.ToString() ?? "";
+        }
+
     }
 }

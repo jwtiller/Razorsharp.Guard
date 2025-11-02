@@ -6,6 +6,12 @@ namespace HelloWorld.Controllers
 {
     public class EmployeesController : ControllerBase
     {
+        private readonly ILogger<EmployeesController> _logger;
+        public EmployeesController(ILogger<EmployeesController> logger)
+        {
+            _logger = logger;
+        }
+
         // basic data
         [HttpGet("public")]
         public ActionResult<BaseEmployeeDTO> GetPublicEmployee()
@@ -30,6 +36,8 @@ namespace HelloWorld.Controllers
                 Salary = 850000,
                 Email = "alice@company.no"
             };
+
+            _logger.LogInformation("Returning employee {@employee}", employee);
 
             return Ok(employee);
         }
